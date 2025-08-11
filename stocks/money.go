@@ -1,16 +1,6 @@
 package stocks
 
 
-type Dollar struct {
-	amount int
-}
-
-
-func (d Dollar) Times(multiplier int) Dollar {
-	return Dollar{d.amount * multiplier}
-}
-
-
 type Money struct {
 	amount float64 
 	currency string
@@ -28,4 +18,11 @@ func NewMoney(amount float64, currency string) Money {
 	return Money{amount, currency}
 }
 
-
+func (m Money) Add(other *Money) *Money {
+	var result Money
+	if m.currency == other.currency {
+		result = Money{amount: m.amount + other.amount, currency: m.currency}
+		return &result
+	}
+	return nil
+}
